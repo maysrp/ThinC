@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<title>ThinC</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			
+		</div>
+		<div class="row show" style="height: 600px;border: 2px solid #aAA;margin: 10px;border-radius: 10px;background: #222222;color:#FFF;overflow-y: scroll;">	
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button class="btn btn-info" id="out">输出结果</button>
+					</div>
+					<input type="text" name="shell" id="command" placeholder="输入你的Shell命令" class="form-control">
+					<div class="input-group-btn">
+						<button class="btn btn-primary" id="in">输入</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).keypress(function(event){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+		if(keycode==13){
+			$("#in").click();
+		}
+	})
+	$("#in").click(function(){
+		var command=$("#command").val();
+		if(command){
+			$.ajax({
+				url:'do.php?command='+command,
+				success:function(data){
+					var com_div=$("<div>$ "+command+"</div>");
+					com_div.appendTo(".show");
+					$("#command").val("");
+					$("#command").attr("placeholder","你的命令已经输入，请等待执行");
+
+				}
+			})
+		}
+	})
+	$("#out").click(function(){
+		achieve();
+	})
+	function achieve(){
+		$.ajax({
+			url:'do.php',
+			method:'post',
+			data:{
+				achieve:'233'
+			},
+			success:function(data){
+					var end=$("<div>$ "+data+"</div>");
+					end.appendTo(".show");
+			}
+		})
+	}
+
+
+</script>
+</html>
