@@ -48,14 +48,20 @@
 					com_div.appendTo(".show");
 					$("#command").val("");
 					$("#command").attr("placeholder","你的命令已经输入，请等待执行");
-
+					scroll();
 				}
 			})
 		}
 	})
 	$("#out").click(function(){
 		achieve();
+		scroll();
 	})
+	function scroll(){
+		var all=document.getElementsByClassName('show')[0].scrollHeight;
+		var height=$(".show").height();
+		$(".show").scrollTop(all-height);
+	}
 	function achieve(){
 		$.ajax({
 			url:'do.php',
@@ -69,7 +75,5 @@
 			}
 		})
 	}
-
-
 </script>
 </html>
