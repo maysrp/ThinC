@@ -6,3 +6,5 @@ web command
 PHP会读取输出achieve.md的内容
 
 在该文件的目录下赋予result.sh 和achieve.md 777权限
+
+crontab去执行该脚本result.sh
